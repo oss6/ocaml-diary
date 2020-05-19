@@ -1,11 +1,5 @@
 open Core
 
-(* let transpose acc = function
-    | [] -> acc, []
-    | xs :: xss ->  *)
-
-(* val map2_exn : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t *)
-
 let rec repeat_s n s = if n = 0 then "" else s ^ repeat_s (n - 1) s
 
 let padr_s l s =
