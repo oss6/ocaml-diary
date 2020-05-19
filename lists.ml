@@ -1,3 +1,5 @@
+open Core
+
 let empty = function
     | []     -> true
     | _ :: _ -> false
@@ -49,3 +51,15 @@ let rec filter p = function
 
 let rec partition p = function
     | [] -> [], []
+
+let splitn n l =
+    let rec splitn' acc = function
+        | _, []      -> [], []
+        | 0, s       -> (acc, s)
+        | n, x :: xs -> splitn' acc @ [x] (n - 1, xs)
+    in splitn' [] (n, l)
+
+let uppercase_first_entry line =
+    match String.split ~on:',' line with
+    | [] -> failwith "uppercase_first_entry"
+    | x :: xs -> String.concat ~sep:"," (String.uppercase x :: xs)
