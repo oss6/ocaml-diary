@@ -63,3 +63,9 @@ let uppercase_first_entry line =
     match String.split ~on:',' line with
     | [] -> failwith "uppercase_first_entry"
     | x :: xs -> String.concat ~sep:"," (String.uppercase x :: xs)
+
+(* as and when *)
+let rec destutter = function
+    | [] | [_] as l                        -> l
+    | hd :: (hd' :: _ as tl) when hd = hd' -> destutter tl
+    | hd :: tl                             -> hd :: destutter tl

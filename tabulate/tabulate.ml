@@ -1,14 +1,8 @@
 open Core
 
-let rec repeat_s n s = if n = 0 then "" else s ^ repeat_s (n - 1) s
-
 let padr_s l s =
     let n = abs (String.length s - l) in
-    s ^ repeat_s n " "
-
-let rec sum = function
-    | []      -> 0
-    | x :: xs -> x + sum xs
+    s ^ String.make n ' '
 
 let tabulate header table =    
     (* Length calculations *)
@@ -20,7 +14,7 @@ let tabulate header table =
     let printed_header = "| " ^ String.concat ~sep:" | " padded_header ^ " |\n" in
     
     (* Divider *)
-    let divider = "| " ^ (repeat_s ((sum max_lengths) + List.length max_lengths * 2) "-") ^ " |\n" in
+    let divider = "| " ^ (String.make ((List.fold max_lengths ~init:0 ~f:(+)) + List.length max_lengths * 2) '-') ^ " |\n" in
     
     (* Table rows *)
     let padded_rows = List.map table ~f:(List.map2_exn max_lengths ~f:padr_s) in
